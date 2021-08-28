@@ -1,1 +1,1 @@
-heroku local bin/www
+web: node bin/www
