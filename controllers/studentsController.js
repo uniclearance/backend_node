@@ -33,11 +33,12 @@ const createUser = async (req, res) => {
       fullname,
       role: config.userTypes.student,
     });
-    const student = await Student.create({
+    let student = await Student.create({
       userId: user.id,
       studentId,
       departmentId: department.id,
     });
+    student = Student.findOne({ id: student.id });
     res.status(201).json({
       status: "success",
       data: {
