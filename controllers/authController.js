@@ -11,11 +11,14 @@ const login = async (req, res) => {
     config.appSecrete
   );
   const student = await Student.findOne({ where: { userId: req.user.id } });
+  const data = {
+    user: req.user,
+    student,
+  };
   res.json({
     status: "ok",
     token,
-    data: req.user,
-    student,
+    data,
   });
 };
 
