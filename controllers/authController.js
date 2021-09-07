@@ -1,6 +1,6 @@
 const Jwt = require("jsonwebtoken");
 const config = require("../config");
-const { Student } = require("../models");
+const { Student,Department } = require("../models");
 
 const login = async (req, res) => {
   const token = Jwt.sign(
@@ -10,7 +10,9 @@ const login = async (req, res) => {
     },
     config.appSecrete
   );
-  const student = await Student.findOne({ where: { userId: req.user.id } });
+  
+  const student = await Student.findOne({ where: { userId: req.user.id },include:["department"] });
+
   const data = {
     user: req.user,
     student,
