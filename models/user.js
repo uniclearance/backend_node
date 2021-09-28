@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     validatePassword(password) {
       return bcrypt.compareSync(password, this.getDataValue("password"));
     }
+    setPassword(password) {
+      
+      this.password = password;
+      return this.save();
+    }
   }
   User.init(
     {
@@ -71,8 +76,9 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
-  User.addHook("beforeCreate", (user) => {
+  User.addHook("beforeSave", (user) => {
     user.password = bcrypt.hashSync(user.password, 10);
   });
+  // User.addHook("beforeSave")
   return User;
 };
