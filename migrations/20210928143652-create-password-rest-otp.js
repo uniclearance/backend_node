@@ -12,7 +12,7 @@ module.exports = {
         type: DataTypes.INTEGER,
       },
       userId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       uuid: {

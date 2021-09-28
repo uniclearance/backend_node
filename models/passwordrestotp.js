@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   PasswordRestOtp.init(
     {
       userId: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       uuid: {
