@@ -7,19 +7,17 @@ module.exports = async (req, res, next) => {
       where: { userId: user.dataValues.id },
     });
     if (!student)
-      return res
-        .status(404)
-        .json({
-          message:
-            "Sorry, there is a problem with your student profile. Contact your department administrator",
-        });
+      return res.status(404).json({
+        message:
+          "Sorry, there is a problem with your student profile. Contact your department administrator",
+      });
     const clearance = await DepartmentClearance.findOne({
       studentId: student.id,
       departpmentId: student.dataValues.departpmentId,
     });
     if (clearance)
       return res
-        .status(401)
+        .status(200)
         .json({ message: "You have already cleared yourself" });
     req.student = student;
     next();

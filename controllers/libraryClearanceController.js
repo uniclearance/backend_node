@@ -30,7 +30,7 @@ const create = async (req, res) => {
       where: { studentId: student.id },
     });
     if (clearances.length > 0)
-      return res.json({ message: "Student has already signed in" });
+      return res.json({ message: "Student has already cleared in" });
     let cleared = await LibraryClearance.create({ studentId: student.id });
     cleared = await LibraryClearance.findByPk(cleared.id);
     res.status(401).json({
