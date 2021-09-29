@@ -23,19 +23,19 @@ const create = async (req, res) => {
     if (issues.length > 0)
       return res.status(403).json({
         status: "error",
-        detail: "Clearance failed because unresolved issues were found",
+        message: "Clearance failed because unresolved issues were found",
         data: issues,
       });
     const clearances = await LibraryClearance.findAll({
       where: { studentId: student.id },
     });
     if (clearances.length > 0)
-      return res.json({ message: "Student has already cleared in" });
+      return res.json({ message: "Student has already cleared" });
     let cleared = await LibraryClearance.create({ studentId: student.id });
     cleared = await LibraryClearance.findByPk(cleared.id);
     res.status(401).json({
       status: "success",
-      message: "You have successfully cleared your self from libray records",
+      message: "Student has already cleared",
       data: cleared,
     });
   } catch (error) {
@@ -43,7 +43,6 @@ const create = async (req, res) => {
     console.log(error);
   }
 };
-
 
 const slefClear = async (req, res) => {
   try {
@@ -73,7 +72,6 @@ const slefClear = async (req, res) => {
     console.log(error);
   }
 };
-
 
 const remove = async (req, res) => {
   try {
